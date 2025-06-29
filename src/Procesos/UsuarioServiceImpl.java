@@ -1,4 +1,4 @@
-package Procesos.Usuario;
+package Procesos;
 
 public class UsuarioServiceImpl {
 }

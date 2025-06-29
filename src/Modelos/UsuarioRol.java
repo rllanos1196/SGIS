@@ -1,4 +1,4 @@
-package Modelos.Seguridad;
+package Modelos;
 
 public class UsuarioRol {
 }

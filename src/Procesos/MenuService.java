@@ -1,4 +1,4 @@
-package Procesos.Menu;
+package Procesos;
 
 public class MenuService {
 }
