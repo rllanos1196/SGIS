@@ -1,149 +1,151 @@
 package Modelos;
 
+
 import java.util.Date;
 
 public class Menu {
 
-	private Long id;
 
-	private String titulo;
+    private Long id;
 
-	private String url;
+    private String titulo;
 
-	private String observacion;
+    private String url;
 
-	private Boolean estado;
+    private String observacion;
 
-	private Long orden;
+    private Boolean estado;
 
-	private Boolean esSuperior;
+    private Long orden;
 
-	private Long menuSuperior;
+    private Boolean esSuperior;
 
-	private Date fechaRegistro;
+    private Long menuSuperior;
 
-	private Long userRegistro;
+    private Date fechaRegistro;
 
-	private Modulo modulo;
+    private Long userRegistro;
 
-	private String labelEstado;
+    private Modulo modulo;
 
-	private String classEstado;
+    private String labelEstado;
 
-	private String observacionCorta;
+    private String classEstado;
 
-	public Menu() {
-	}
+    private String observacionCorta;
 
-	public Long getId() {
-		return id;
-	}
+    public Menu() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public String getObservacion() {
-		return observacion;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
+    public String getObservacion() {
+        return observacion;
+    }
 
-	public Boolean getEstado() {
-		return estado;
-	}
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
+    public Boolean getEstado() {
+        return estado;
+    }
 
-	public Long getOrden() {
-		return orden;
-	}
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 
-	public void setOrden(Long orden) {
-		this.orden = orden;
-	}
+    public Long getOrden() {
+        return orden;
+    }
 
-	public Boolean getEsSuperior() {
-		return esSuperior;
-	}
+    public void setOrden(Long orden) {
+        this.orden = orden;
+    }
 
-	public void setEsSuperior(Boolean esSuperior) {
-		this.esSuperior = esSuperior;
-	}
+    public Boolean getEsSuperior() {
+        return esSuperior;
+    }
 
-	public Long getMenuSuperior() {
-		return menuSuperior;
-	}
+    public void setEsSuperior(Boolean esSuperior) {
+        this.esSuperior = esSuperior;
+    }
 
-	public void setMenuSuperior(Long menuSuperior) {
-		this.menuSuperior = menuSuperior;
-	}
+    public Long getMenuSuperior() {
+        return menuSuperior;
+    }
 
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
+    public void setMenuSuperior(Long menuSuperior) {
+        this.menuSuperior = menuSuperior;
+    }
 
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
-	}
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
 
-	public Long getUserRegistro() {
-		return userRegistro;
-	}
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
 
-	public void setUserRegistro(Long userRegistro) {
-		this.userRegistro = userRegistro;
-	}
+    public Long getUserRegistro() {
+        return userRegistro;
+    }
 
-	public Modulo getModulo() {
-		return modulo;
-	}
+    public void setUserRegistro(Long userRegistro) {
+        this.userRegistro = userRegistro;
+    }
 
-	public void setModulo(Modulo modulo) {
-		this.modulo = modulo;
-	}
+    public Modulo getModulo() {
+        return modulo;
+    }
 
-	public String getLabelEstado() {
-		return labelEstado;
-	}
+    public void setModulo(Modulo modulo) {
+        this.modulo = modulo;
+    }
 
-	public void setLabelEstado(String labelEstado) {
-		this.labelEstado = labelEstado;
-	}
+    public String getLabelEstado() {
+        return labelEstado;
+    }
 
-	public String getClassEstado() {
-		return classEstado;
-	}
+    public void setLabelEstado(String labelEstado) {
+        this.labelEstado = labelEstado;
+    }
 
-	public void setClassEstado(String classEstado) {
-		this.classEstado = classEstado;
-	}
+    public String getClassEstado() {
+        return classEstado;
+    }
 
-	public String getObservacionCorta() {
-		return observacionCorta;
-	}
+    public void setClassEstado(String classEstado) {
+        this.classEstado = classEstado;
+    }
 
-	public void setObservacionCorta(String observacionCorta) {
-		this.observacionCorta = observacionCorta;
-	}
+    public String getObservacionCorta() {
+        return observacionCorta;
+    }
+
+    public void setObservacionCorta(String observacionCorta) {
+        this.observacionCorta = observacionCorta;
+    }
 }

@@ -1,4 +1,4 @@
-package Modelos.General;
+package Modelos;
 
 public class Prueba {
 }
