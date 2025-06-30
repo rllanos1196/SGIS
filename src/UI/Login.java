@@ -30,9 +30,17 @@ public class Login {
                 String password = new String(pwPassword.getPassword());
 
                 // Aquí puedes agregar la lógica de autenticación
-                if (user.equals("admin") && password.equals("admin")) {
-                    JOptionPane.showMessageDialog(frame, "Login exitoso");
+                if (user.equals("MasterIvan") && password.equals("Botadaso")) {
+                    JOptionPane.showMessageDialog(frame, "Login exitoso como administrador");
                     // Aquí puedes abrir la siguiente ventana o realizar otra acción
+                } else if (user.equals("RamaJham") && password.equals("LimondeCevichero")) {
+                    JOptionPane.showMessageDialog(frame, "Login exitoso como usuario");
+                    // Aquí puedes abrir la siguiente ventana o realizar otra acción
+
+                } else if (user.equals("Manuel") && password.equals("Porlascompaneras")) {
+                    JOptionPane.showMessageDialog(frame, "Login exitoso como usuario");
+                    // Aquí puedes abrir la siguiente ventana o realizar otra acción
+                    
                 } else {
                     JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
                 }
