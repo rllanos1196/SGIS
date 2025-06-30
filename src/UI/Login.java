@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +16,12 @@ public class Login {
     public Login() {
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(300, 160);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         placeComponents(panel);
+
 
         frame.setVisible(true);
         btnIngresar.addActionListener(new ActionListener() {
@@ -78,12 +80,19 @@ public class Login {
         pwPassword.setBounds(100, 50, 165, 25);
         panel.add(pwPassword);
 
+        int buttonWidth = 80;
+        int buttonHeight = 25;
+        int gap = 20;
+        int panelWidth = 300; // igual al ancho del frame
+        int totalWidth = buttonWidth * 2 + gap;
+        int startX = (panelWidth - totalWidth) / 2;
+
         btnIngresar = new JButton("Ingresar");
-        btnIngresar.setBounds(10, 80, 80, 25);
+        btnIngresar.setBounds(startX, 80, buttonWidth, buttonHeight);
         panel.add(btnIngresar);
 
         btnCancel = new JButton("Cancelar");
-        btnCancel.setBounds(100, 80, 80, 25);
+        btnCancel.setBounds(startX + buttonWidth + gap, 80, buttonWidth, buttonHeight);
         panel.add(btnCancel);
     }
 
