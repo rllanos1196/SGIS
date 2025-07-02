@@ -1,4 +1,4 @@
-package Procesos;
+package procesos;
 
 public class MenuServiceImpl {
 }
