@@ -1,0 +1,31 @@
+@startuml
+class UI.Modulo {
+- {static} long serialVersionUID
+- JPanel contentPane
+- JTextField textField
+- JLabel lblNewLabel
+- JLabel lblNewLabel_1
+- JLabel lblNewLabel_2
+- JTextField textField_1
+- JTextField textField_2
+- JTable table
++ {static} void main(String[])
+}
+
+
+class UI.Login {
+- JTextField txtUser
+- JLabel lblUser
+- JLabel lblPasw
+- JButton btnCancel
+- JButton btnIngresar
+- JPasswordField pwPassword
+- void placeComponents(JPanel)
++ {static} void main(String[])
+}
+
+
+
+
+javax.swing.JFrame <|-- UI.Modulo
+@enduml

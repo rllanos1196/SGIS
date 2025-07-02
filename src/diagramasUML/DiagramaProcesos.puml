@@ -1,0 +1,23 @@
+@startuml
+class procesos.UsuarioServiceImpl {
+}
+class procesos.MenuService {
+}
+class procesos.UsuarioService {
+}
+class procesos.MenuServiceImpl {
+}
+class procesos.SistemaServiceImpl {
+- {static} List<Sistema> listaSistemas
++ boolean registrarSistema(Sistema)
+}
+
+
+interface procesos.SistemaService {
+~ boolean registrarSistema(Sistema)
+}
+
+
+
+procesos.SistemaService <|.. procesos.SistemaServiceImpl
+@enduml

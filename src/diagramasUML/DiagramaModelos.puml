@@ -1,0 +1,247 @@
+@startuml
+class modelos.UsuarioRol {
+- Usuario usuario
+- Rol rol
+- Boolean estado
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Usuario getUsuario()
++ void setUsuario(Usuario)
++ Rol getRol()
++ void setRol(Rol)
++ Boolean getEstado()
++ void setEstado(Boolean)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.MenuPermisos {
+- Long id
+- Menu menu
+- Rol rol
+- Boolean lectura
+- Boolean creacion
+- Boolean edicion
+- Boolean eliminacion
+- Boolean impresion
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Long getId()
++ void setId(Long)
++ Menu getMenu()
++ void setMenu(Menu)
++ Rol getRol()
++ void setRol(Rol)
++ Boolean getLectura()
++ void setLectura(Boolean)
++ Boolean getCreacion()
++ void setCreacion(Boolean)
++ Boolean getEdicion()
++ void setEdicion(Boolean)
++ Boolean getEliminacion()
++ void setEliminacion(Boolean)
++ Boolean getImpresion()
++ void setImpresion(Boolean)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.Usuario {
+- Long id
+- Long idCompania
+- Long idDependencia
+- Long idCargo
+- Long idPersona
+- Sistema sistema
+- String nombre
+- String password
+- Boolean estado
+- LocalDateTime fechaIngreso
+- LocalDateTime fechaCaduca
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Long getId()
++ void setId(Long)
++ Long getIdCompania()
++ void setIdCompania(Long)
++ Long getIdDependencia()
++ void setIdDependencia(Long)
++ Long getIdCargo()
++ void setIdCargo(Long)
++ Long getIdPersona()
++ void setIdPersona(Long)
++ Sistema getSistema()
++ void setSistema(Sistema)
++ String getNombre()
++ void setNombre(String)
++ String getPassword()
++ void setPassword(String)
++ Boolean getEstado()
++ void setEstado(Boolean)
++ LocalDateTime getFechaIngreso()
++ void setFechaIngreso(LocalDateTime)
++ LocalDateTime getFechaCaduca()
++ void setFechaCaduca(LocalDateTime)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.Sistema {
+- Long id
+- String codigo
+- String nombre
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
+- LocalDateTime fechaModifica
+- Long idUsuarioModifica
+- Integer estado
+- Long idDependencia
++ Long getId()
++ void setId(Long)
++ String getCodigo()
++ void setCodigo(String)
++ String getNombre()
++ void setNombre(String)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
++ LocalDateTime getFechaModifica()
++ void setFechaModifica(LocalDateTime)
++ Long getIdUsuarioModifica()
++ void setIdUsuarioModifica(Long)
++ Integer getEstado()
++ void setEstado(Integer)
++ Long getIdDependencia()
++ void setIdDependencia(Long)
+}
+
+
+class modelos.Menu {
+- Long id
+- Modulo modulo
+- Menu menuSuperior
+- String titulo
+- String url
+- String observacion
+- Integer orden
+- Boolean esSuperior
+- Integer estado
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Long getId()
++ void setId(Long)
++ Modulo getModulo()
++ void setModulo(Modulo)
++ Menu getMenuSuperior()
++ void setMenuSuperior(Menu)
++ String getTitulo()
++ void setTitulo(String)
++ String getUrl()
++ void setUrl(String)
++ String getObservacion()
++ void setObservacion(String)
++ Integer getOrden()
++ void setOrden(Integer)
++ Boolean getEsSuperior()
++ void setEsSuperior(Boolean)
++ Integer getEstado()
++ void setEstado(Integer)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.Rol {
+- Long id
+- Sistema sistema
+- String codigo
+- String nombre
+- String observacion
+- Boolean estado
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Long getId()
++ void setId(Long)
++ Sistema getSistema()
++ void setSistema(Sistema)
++ String getCodigo()
++ void setCodigo(String)
++ String getNombre()
++ void setNombre(String)
++ String getObservacion()
++ void setObservacion(String)
++ Boolean getEstado()
++ void setEstado(Boolean)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.MenuRol {
+- Long id
+- Menu menu
+- Rol rol
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
++ Long getId()
++ void setId(Long)
++ Menu getMenu()
++ void setMenu(Menu)
++ Rol getRol()
++ void setRol(Rol)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
+}
+
+
+class modelos.Modulo {
+- Long id
+- String codigo
+- String nombre
+- String descripcion
+- String icono
+- Integer orden
+- Integer estado
+- LocalDateTime fechaRegistro
+- Long idUsuarioRegistro
+- String imagen
++ Long getId()
++ void setId(Long)
++ String getCodigo()
++ void setCodigo(String)
++ String getNombre()
++ void setNombre(String)
++ String getDescripcion()
++ void setDescripcion(String)
++ String getIcono()
++ void setIcono(String)
++ Integer getOrden()
++ void setOrden(Integer)
++ Integer getEstado()
++ void setEstado(Integer)
++ LocalDateTime getFechaRegistro()
++ void setFechaRegistro(LocalDateTime)
++ Long getIdUsuarioRegistro()
++ void setIdUsuarioRegistro(Long)
++ String getImagen()
++ void setImagen(String)
+}
+
+
+@enduml
