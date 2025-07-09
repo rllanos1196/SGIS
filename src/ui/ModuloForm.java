@@ -1,8 +1,14 @@
 package ui;
 
-import javax.swing.*;
+import modelos.Modulo;
+import procesos.ModuloService;
+import procesos.ModuloServiceImpl;
 
-public class Modulo {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ModuloForm {
 
     private JLabel lblCodigo;
     private JLabel lblNombre;
@@ -16,9 +22,11 @@ public class Modulo {
     private JButton btnEditar;
     private JPanel Modulo;
 
+    private ModuloService modService;
 
-    public Modulo() {
+    public ModuloForm() {
 
+        modService = new ModuloServiceImpl();
         // Set up the JFrame
         JFrame frame = new JFrame("Módulo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,16 +64,27 @@ public class Modulo {
         panel.add(new JScrollPane(tbModulo));
         panel.add(btnEditar);
 
+       // setVisible(true);
 
+        btnRegistrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = txtCodigo.getText();
+                String nombre = txtNombre.getText();
+                String descripcion = textArea1.getText();
 
-    }
+                if (codigo.isEmpty() || nombre.isEmpty() || descripcion.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
+                    return;
+                }
+                 Modulo modulo = new Modulo(codigo, nombre, descripcion);
+                 modService.insert(modulo);
+                JOptionPane.showMessageDialog(frame, "Módulo registrado correctamente.");
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Modulo modulo = new Modulo();
-            modulo.Modulo.setVisible(true);
+            }
         });
     }
+
 
 
 }

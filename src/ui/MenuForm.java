@@ -8,7 +8,7 @@ public class MenuForm extends JFrame {
 
     public MenuForm() {
 
-        setTitle("Menú Principal");
+        setTitle("Menú Principal - SGIS");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -23,9 +23,18 @@ public class MenuForm extends JFrame {
         menuArchivo.add(itemSalir);
 
         // Menú Módulos
+       /* JMenu menuModulos = new JMenu("Módulos");
+        JMenuItem itemModulo1 = new JMenuItem("Módulo");
+        JMenuItem itemModulo2 = new JMenuItem("Sistema");
+        menuModulos.add(itemModulo1);
+        menuModulos.add(itemModulo2);*/
         JMenu menuModulos = new JMenu("Módulos");
-        JMenuItem itemModulo1 = new JMenuItem("Módulo 1");
-        JMenuItem itemModulo2 = new JMenuItem("Módulo 2");
+        JMenuItem itemModulo1 = new JMenuItem("Módulo");
+        JMenuItem itemModulo2 = new JMenuItem("Sistema");
+
+        // Acción para abrir el formulario Modulo
+        itemModulo1.addActionListener(e -> new ModuloForm());
+
         menuModulos.add(itemModulo1);
         menuModulos.add(itemModulo2);
 
@@ -40,12 +49,8 @@ public class MenuForm extends JFrame {
         JLabel label = new JLabel("Welcome to your security system.", SwingConstants.CENTER);
         add(label);
 
+        setVisible(true);
 
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MenuForm menuForm = new MenuForm();
-            menuForm.setVisible(true);
-        });
-    }
+
 }

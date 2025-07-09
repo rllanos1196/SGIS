@@ -8,10 +8,19 @@ public class Modulo {
     private String descripcion;
     private String icono;
     private Integer orden;
-    private Integer estado;
+    private Boolean estado;
     private LocalDateTime fechaRegistro;
     private Long idUsuarioRegistro;
     private String imagen;
+
+    public Modulo() {
+    }
+
+    public Modulo(String codigo, String nombre, String descripcion) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
     public Long getId() {
         return id;
@@ -61,11 +70,11 @@ public class Modulo {
         this.orden = orden;
     }
 
-    public Integer getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
