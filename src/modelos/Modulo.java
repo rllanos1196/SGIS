@@ -13,6 +13,15 @@ public class Modulo {
     private Long idUsuarioRegistro;
     private String imagen;
 
+    public Modulo() {
+    }
+
+    public Modulo(String codigo, String nombre, String descripcion) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
     public Long getId() {
         return id;
     }

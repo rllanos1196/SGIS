@@ -23,9 +23,18 @@ public class MenuForm extends JFrame {
         menuArchivo.add(itemSalir);
 
         // Menú Módulos
+       /* JMenu menuModulos = new JMenu("Módulos");
+        JMenuItem itemModulo1 = new JMenuItem("Módulo");
+        JMenuItem itemModulo2 = new JMenuItem("Sistema");
+        menuModulos.add(itemModulo1);
+        menuModulos.add(itemModulo2);*/
         JMenu menuModulos = new JMenu("Módulos");
-        JMenuItem itemModulo1 = new JMenuItem("Módulo 1");
-        JMenuItem itemModulo2 = new JMenuItem("Módulo 2");
+        JMenuItem itemModulo1 = new JMenuItem("Módulo");
+        JMenuItem itemModulo2 = new JMenuItem("Sistema");
+
+        // Acción para abrir el formulario Modulo
+        itemModulo1.addActionListener(e -> new ModuloForm());
+
         menuModulos.add(itemModulo1);
         menuModulos.add(itemModulo2);
 
