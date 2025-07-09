@@ -8,7 +8,7 @@ public class MenuForm extends JFrame {
 
     public MenuForm() {
 
-        setTitle("Menú Principal");
+        setTitle("Menú Principal - SGIS");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -40,12 +40,8 @@ public class MenuForm extends JFrame {
         JLabel label = new JLabel("Welcome to your security system.", SwingConstants.CENTER);
         add(label);
 
+        setVisible(true);
 
     }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MenuForm menuForm = new MenuForm();
-            menuForm.setVisible(true);
-        });
-    }
+
 }
