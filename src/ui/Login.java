@@ -1,5 +1,5 @@
 package ui;
-
+import java.awt.*;
 import javax.swing.*;
 
 public class Login {
@@ -9,6 +9,10 @@ public class Login {
     private JButton btnCancelar;
     private JButton btnIngresar;
     private JProgressBar progressBar1;
+    private JLabel lblUser;
+    private JLabel lblPassword;
+
+
 
     public Login(){
         JFrame frame = new JFrame("Login");
@@ -19,10 +23,22 @@ public class Login {
         frame.pack();
         frame.setVisible(true);;
 
+        // Establecer icono de la ventana
+        lblUser.setIcon(new ImageIcon("src/ImgIcon/user.png"));
+        Image userIcon = ((ImageIcon) lblUser.getIcon()).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        lblUser.setIcon(new ImageIcon(userIcon));
+
+        lblPassword.setIcon(new ImageIcon("src/ImgIcon/key.png"));
+        Image passIcon = ((ImageIcon) lblPassword.getIcon()).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        lblPassword.setIcon(new ImageIcon(passIcon));
+
+
+
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
 
         btnIngresar.addActionListener(e -> {
+            // Validar usuario y contraseña
             String user = txtUser.getText();
             String pass = new String(pwUser.getPassword());
             if (user.equals("admin") && pass.equals("admin")) {
