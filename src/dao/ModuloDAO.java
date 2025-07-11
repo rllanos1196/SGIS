@@ -11,7 +11,7 @@ import java.util.List;
 public class ModuloDAO {
 
     public boolean insert(Modulo mod ) {
-        String sql = "INSERT INTO modulo(CODIGO,NOMBRE, DESCRIPCION,ORDEN,ESTADO,FECHA_REGISTRO) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO modulo(CODIGO,NOMBRE, DESCRIPCION,ORDEN,ESTADO,FECHA_REGISTRO,ID_USUARIO_REGISTRO) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, mod.getCodigo());
@@ -20,6 +20,7 @@ public class ModuloDAO {
             ps.setInt(4, mod.getOrden());
             ps.setBoolean(5, mod.getEstado());
             ps.setObject(6, mod.getFechaRegistro());
+            ps.setLong(7,mod.getIdUsuarioRegistro());
             ps.executeUpdate();
             return Boolean.TRUE;
         } catch (SQLException e) {
@@ -49,6 +50,25 @@ public class ModuloDAO {
         }
         return lista;
     }
+
+    public Integer getOrden() {
+        Integer orden = 0;
+        String sql = "select ORDEN from modulo  order by ID desc limit 1";
+        try (Connection con = Conexion.conectar();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                Modulo m = new Modulo();
+                orden = rs.getInt("ORDEN");
+                return orden;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orden;
+    }
+
+
     public Modulo findById(long id) {
         String sql = "SELECT * FROM modulo WHERE ID = ?";
         try (Connection con = Conexion.conectar();

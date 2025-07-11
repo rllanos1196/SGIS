@@ -9,7 +9,17 @@ public class ModuloServiceImpl implements ModuloService{
     ModuloDAO modDAO = new ModuloDAO();
 
     @Override
-    public boolean insert(Modulo modulo) {
+    public boolean insertModulo(Modulo modulo) {
+        //obtener el último orden
+        Integer orden = modDAO.getOrden();
+        if (orden == null) {
+            orden = 0; // Si no hay módulos, comenzamos desde 0
+        }
+        modulo.setOrden(orden + 1);
+        modulo.setEstado(Boolean.TRUE);
+        modulo.setFechaRegistro(java.time.LocalDateTime.now());
+        modulo.setIdUsuarioRegistro(1L);
+
         Boolean res = modDAO.insert(modulo);
         if (res) {
             System.out.println("Módulo registrado correctamente.");
@@ -20,7 +30,7 @@ public class ModuloServiceImpl implements ModuloService{
     }
 
     @Override
-    public boolean update(Modulo modulo) {
+    public boolean updateModulo(Modulo modulo) {
         Boolean res = modDAO.update(modulo);
         if (res) {
             System.out.println("Módulo actualizado correctamente.");
@@ -31,7 +41,7 @@ public class ModuloServiceImpl implements ModuloService{
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean deleteModulo(Long id) {
         Boolean res = modDAO.delete(id);
         if (res) {
             System.out.println("Módulo eliminado correctamente.");
