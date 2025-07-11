@@ -1,16 +1,21 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SistemaForm {
 
-    private JTextField txtCodigo;
-    private JTextField textField2;
+    private JTextField txtCodigoS;
+    private JTextField txtNombreS;
     private JTable tbSistema;
-    private JButton btnRegistrar;
-    private JButton btnEditar;
-    private JButton btnEliminar;
+    private JButton btnRegistrarS;
+    private JButton btnEditarS;
+    private JButton btnEliminarS;
     private JPanel Sistema;
+    private DefaultTableModel tableModel;
 
     private SistemaForm(){
         // Set up the JFrame
@@ -23,28 +28,51 @@ public class SistemaForm {
         frame.setVisible(true);
 
 
-        // Initialize components
-        txtCodigo = new JTextField();
-        textField2 = new JTextField();
-        tbSistema = new JTable();
-        btnRegistrar = new JButton("Registrar");
-        btnEditar = new JButton("Editar");
-        btnEliminar = new JButton("Eliminar");
+        btnRegistrarS.setIcon(new ImageIcon("src/ImgIcon/save.png"));
+        Image saveIcon = ((ImageIcon) btnRegistrarS.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnRegistrarS.setIcon(new ImageIcon(saveIcon));
 
-        // Set up the layout and add components
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        btnEditarS.setIcon(new ImageIcon("src/ImgIcon/editar.png"));
+        Image userIcon = ((ImageIcon) btnEditarS.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnEditarS.setIcon(new ImageIcon(userIcon));
 
-        panel.add(new JLabel("Código:"));
-        panel.add(txtCodigo);
-        panel.add(new JLabel("Nombre:"));
-        panel.add(textField2);
-        panel.add(new JScrollPane(tbSistema));
-        panel.add(btnRegistrar);
-        panel.add(btnEditar);
-        panel.add(btnEliminar);
+        btnEliminarS.setIcon(new ImageIcon("src/ImgIcon/delete.png"));
+        Image passIcon = ((ImageIcon) btnEliminarS.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnEliminarS.setIcon(new ImageIcon(passIcon));
 
 
+        btnRegistrarS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //validar los campos
+                long id = System.currentTimeMillis(); // Genera un ID único basado en el tiempo actual
+                String codigo = txtCodigoS.getText();
+                String nombre = txtNombreS.getText();
+                if (codigo.isEmpty() || nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
+                    return;
+                }
+                JOptionPane.showMessageDialog(frame, "Registro exitoso","Información", JOptionPane.INFORMATION_MESSAGE);
+
+
+
+            }
+        });
+
+        btnEditarS.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Validar los campos
+                String codigo = txtCodigoS.getText();
+                String nombre = txtNombreS.getText();
+                if (codigo.isEmpty() || nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
+                    return;
+                }
+                // Muestra de una alerta
+                JOptionPane.showMessageDialog(frame, "Edición exitosa", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
 
     }
@@ -52,6 +80,5 @@ public class SistemaForm {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(SistemaForm::new);
     }
-
 
 }
