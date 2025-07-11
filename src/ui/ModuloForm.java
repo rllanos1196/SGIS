@@ -5,12 +5,13 @@ import procesos.ModuloService;
 import procesos.ModuloServiceImpl;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 
 public class ModuloForm {
-
     private JLabel lblCodigo;
     private JLabel lblNombre;
     private JLabel lblDescripcion;
@@ -21,64 +22,41 @@ public class ModuloForm {
     private JButton btnRegistrar;
     private JTable tbModulo;
     private JButton btnEditar;
-    private JPanel Modulo;
+    private JPanel jpModulo;
+    private JScrollPane scrollPane;
+
+    private DefaultTableModel tableModel;
 
     private ModuloService modService;
 
     public ModuloForm() {
-
         modService = new ModuloServiceImpl();
-        // Set up the JFrame
+
+        // Frame y contenido del panel generado automáticamente por el diseñador
         JFrame frame = new JFrame("Módulo");
+        frame.setContentPane(jpModulo);  // ¡Esta línea es la que usa tu diseño!
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        frame.setSize(600, 400);
-        frame.setContentPane(Modulo);
         frame.pack();
         frame.setVisible(true);
+        // frame.setSize(800, 600);
+
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Código", "Nombre", "Descripción","Estado"}, 0); // Ajusta las columnas si son de Usuarios
+        tbModulo.setModel(tableModel);
+        tbModulo.getTableHeader().repaint();
+        tbModulo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tbModulo.setDefaultEditor(Object.class, null); // Deshabilita la edición directa en la tabla
+        tbModulo.getColumnModel().getColumn(0).setPreferredWidth(50); // Ajusta el ancho de la columna ID
+        tbModulo.getColumnModel().getColumn(1).setPreferredWidth(100); // Ajusta el ancho de la columna Código
+        tbModulo.getColumnModel().getColumn(2).setPreferredWidth(150); // Ajusta el ancho de la columna Nombre
+        tbModulo.getColumnModel().getColumn(3).setPreferredWidth(200); // Ajusta el ancho de la columna Descripción
+        tbModulo.getColumnModel().getColumn(4).setPreferredWidth(100); // Ajusta el ancho de la columna Estado
+        tbModulo.setRowHeight(30); // Ajusta la altura de las filas
+        tbModulo.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // Deshabilita el ajuste automático de columnas
+        scrollPane.setViewportView(tbModulo); // Asegúrate de que el JScrollPane esté configurado correctamente
 
 
-        //YA NO SE INICIALIZA LOS COMPONENTES AQUÍ, SE HACEN EN EL DISEÑADOR DE INTELLIJ
-//        // Initialize components
-//        lblCodigo = new JLabel("Código:");
-//        txtCodigo = new JTextField();
-//        lblNombre = new JLabel("Nombre:");
-//        txtNombre = new JTextField();
-//        lblDescripcion = new JLabel("Descripción:");
-//        textArea1 = new JTextArea();
-//        btnEliminar = new JButton("Eliminar");
-//        btnRegistrar = new JButton("Registrar");
-//        tbModulo = new JTable();
-//        btnEditar = new JButton("Editar");
-//
-//        // Set up the layout and add components
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-//
-//        panel.add(lblCodigo);
-//        panel.add(lblNombre);
-//        panel.add(lblDescripcion);
-//        panel.add(txtCodigo);
-//        panel.add(txtNombre);
-//        panel.add(new JScrollPane(textArea1));
-//        panel.add(btnEliminar);
-//        panel.add(btnRegistrar);
-//        panel.add(new JScrollPane(tbModulo));
-//        panel.add(btnEditar);
-
-       // setVisible(true);
-        btnRegistrar.setIcon(new ImageIcon("src/ImgIcon/save.png"));
-        Image saveIcon = ((ImageIcon) btnRegistrar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        btnRegistrar.setIcon(new ImageIcon(saveIcon));
-
-        btnEditar.setIcon(new ImageIcon("src/ImgIcon/editar.png"));
-        Image editIcon = ((ImageIcon) btnEditar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        btnEditar.setIcon(new ImageIcon(editIcon));
-
-        btnEliminar.setIcon(new ImageIcon("src/ImgIcon/delete.png"));
-        Image deleteIcon = ((ImageIcon) btnEliminar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-        btnEliminar.setIcon(new ImageIcon(deleteIcon));
-
+        // Evento del botón que SÍ existe en el .form
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,18 +68,47 @@ public class ModuloForm {
                     JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
                     return;
                 }
-                 Modulo modulo = new Modulo(codigo, nombre, descripcion);
-                 modService.insert(modulo);
+
+                Modulo modulo = new Modulo(codigo, nombre, descripcion);
+                modService.insertModulo(modulo);
                 JOptionPane.showMessageDialog(frame, "Módulo registrado correctamente.");
 
+                limpiarCamposEnContenedor(jpModulo);
             }
         });
+
+        listarModulo();
+    }
+    private void limpiarCamposEnContenedor(java.awt.Container contenedor) {
+        for (java.awt.Component c : contenedor.getComponents()) {
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            } else if (c instanceof JTextArea) {
+                ((JTextArea) c).setText("");
+            } else if (c instanceof JFormattedTextField) {
+                ((JFormattedTextField) c).setText("");
+            } else if (c instanceof java.awt.Container) {
+                limpiarCamposEnContenedor((java.awt.Container) c);
+            }
+        }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ModuloForm());
+    private void listarModulo() {
+        tableModel.setRowCount(0);
+        List<Modulo> modulos = modService.getAll();
+        if (modulos != null && !modulos.isEmpty()) {
+            for (Modulo m : modulos) {
+                tableModel.addRow(new Object[]{m.getId(), m.getCodigo(), m.getNombre(), m.getDescripcion(),m.getEstado()== Boolean.TRUE ? "Activo" : "Inactivo"});
+            }
+        } else {
+            System.out.println("DEBUG: No se encontraron libros para cargar en la tabla.");
+        }
+        tbModulo.revalidate();
+        tbModulo.repaint();
     }
 
 
-
+    /*public static void main(String[] args) {
+        SwingUtilities.invokeLater(ModuloForm::new);
+    }*/
 }

@@ -14,7 +14,7 @@ public class SistemaForm {
     private JButton btnRegistrarS;
     private JButton btnEditarS;
     private JButton btnEliminarS;
-    private JPanel Sistema;
+    private JPanel jpSistema;
     private DefaultTableModel tableModel;
 
     private SistemaForm(){
@@ -23,7 +23,7 @@ public class SistemaForm {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setSize(600, 400);
-        frame.setContentPane(Sistema);
+        frame.setContentPane(jpSistema);
         frame.pack();
         frame.setVisible(true);
 
