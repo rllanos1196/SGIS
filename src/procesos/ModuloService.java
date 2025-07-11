@@ -5,9 +5,9 @@ import modelos.Modulo;
 import java.util.List;
 
 public interface ModuloService {
-    boolean insert(Modulo modulo);
-    boolean update(Modulo modulo);
-    boolean delete(Long id);
+    boolean insertModulo(Modulo modulo);
+    boolean updateModulo(Modulo modulo);
+    boolean deleteModulo(Long id);
     Modulo findById(Long id);
     List<Modulo> getAll();
 }
