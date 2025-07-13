@@ -112,7 +112,7 @@ class SistemaInternalFrame extends JInternalFrame {
 class UsuarioInternalFrame extends JInternalFrame {
     public UsuarioInternalFrame() {
         super("Usuario", true, true, true, true);
-        setSize(700, 500);
+        setSize(800, 500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // Contenido de tu formulario Usuario

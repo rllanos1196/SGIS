@@ -29,9 +29,11 @@ public class Persona {
         this.estado = estado;
     }
 
-    public Persona(long id, String nombre) {
+    public Persona(long id, String nombre, String apePaterno, String apeMaterno) {
         this.id = id;
         this.nombre = nombre;
+        this.apePaterno = apePaterno;
+        this.apeMaterno = apeMaterno;
     }
 
     public long getId() {
@@ -132,6 +134,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return nombre + " " + apePaterno + " " + apeMaterno + " - " + nroDocumento;
+        return nombre + " " + apePaterno + " " + apeMaterno;
     }
 }

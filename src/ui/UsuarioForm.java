@@ -9,32 +9,51 @@ import procesos.SistemaServiceImpl;
 import utilerias.Response;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioForm extends JPanel{
     private JPanel jpUsuario;
-    private JComboBox cbCompania;
+    private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
     private JComboBox comboBox4;
     private JComboBox comboBox5;
-    private JTextField txtUsuarioF;
-    private JPasswordField pwUsuarioF;
+    private JTextField txtUserF;
+    private JPasswordField pwUserF;
     private JButton btnRegistrarUF;
     private JButton btnModificarUF;
     private JButton btnEliminarUF;
+    private JTable tbUserF;
+    private JScrollPane scrollPane;
 
     //Frame contenido del panel
     SistemaService sisService;
     PersonaService perService;
+    private DefaultTableModel tableModel;
 
     public UsuarioForm (){
         sisService = new SistemaServiceImpl();
         perService = new PersonaServiceImpl();
         setLayout(new BorderLayout());
         add(jpUsuario, BorderLayout.CENTER);
+
+
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Cargo", "Persona", "Usuario"}, 0);
+        tbUserF.setModel(tableModel);
+        tbUserF.getTableHeader().repaint();
+        tbUserF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tbUserF.setDefaultEditor(Object.class, null); // Deshabilita la edición directa en la tabla
+        tbUserF.getColumnModel().getColumn(0).setPreferredWidth(50); // Ajusta el ancho de la columna ID
+        tbUserF.getColumnModel().getColumn(1).setPreferredWidth(100); // Ajusta el ancho de la columna Código
+        tbUserF.getColumnModel().getColumn(2).setPreferredWidth(150); // Ajusta el ancho de la columna Nombre
+        tbUserF.getColumnModel().getColumn(3).setPreferredWidth(80); // Ajusta el ancho de la columna Descripción
+
+        tbUserF.setRowHeight(30); // Ajusta la altura de las filas
+        tbUserF.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // Deshabilita el ajuste automático de columnas
+        scrollPane.setViewportView(tbUserF); // Asegúrate de que el JScrollPane esté configurado correctamente
 
 
         // Configuración de los botones
@@ -51,11 +70,11 @@ public class UsuarioForm extends JPanel{
         btnEliminarUF.setIcon(new ImageIcon(deleteIcon));
 
 
-        llenarComboBoxCompania(cbCompania);
-        llenarComboBoxDependencia(comboBox2);
-        llenarComboBoxCargo(comboBox3);
-        llenarComboBoxPersona(comboBox4);
-        llenarComboBoxSistema(comboBox5);
+        llenarComboBoxCompania(comboBox1);
+        llenarComboBoxDependencia(comboBox4);
+        llenarComboBoxCargo(comboBox2);
+        llenarComboBoxPersona(comboBox5);
+        llenarComboBoxSistema(comboBox3);
 
     }
 
@@ -140,7 +159,7 @@ public class UsuarioForm extends JPanel{
     private void llenarComboBoxPersona(JComboBox<Persona> combo) {
         combo.removeAllItems();
         List<Persona>lstPer = new ArrayList<>();
-        combo.addItem(new Persona(0L,"Seleccione una Persona"));
+        combo.addItem(new Persona(0L,"Seleccione una Persona","",""));
         Response<List<Persona>>res = perService.listarPersonas();
         lstPer = res.getData();
 
