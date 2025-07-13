@@ -17,7 +17,7 @@ public class SistemaForm {
     private JPanel jpSistema;
     private DefaultTableModel tableModel;
 
-    private SistemaForm(){
+    public SistemaForm(){
         // Set up the JFrame
         JFrame frame = new JFrame("Sistema");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,8 +77,8 @@ public class SistemaForm {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(SistemaForm::new);
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(SistemaForm::new);
+//    }
 
 }
