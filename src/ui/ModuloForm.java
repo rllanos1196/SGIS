@@ -127,6 +127,7 @@ public class ModuloForm {
 
                 Long id = (Long) tableModel.getValueAt(selectedRow, 0);
                 Modulo modulo = modService.findById(id);
+//                jpModulo.setTittle("Editar Módulo");
 
                 if (modulo != null) {
                     txtCodigo.setText(modulo.getCodigo());
