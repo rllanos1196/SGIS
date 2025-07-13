@@ -198,11 +198,8 @@ public class ModuloForm {
         tbModulo.repaint();
     }
 
-
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ModuloForm::new);
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(ModuloForm::new);
+//    }
 
 }

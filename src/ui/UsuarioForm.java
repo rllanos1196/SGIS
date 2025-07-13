@@ -5,16 +5,17 @@ import java.awt.*;
 
 public class UsuarioForm {
     private JPanel jpUsuario;
-    private JComboBox cbCompania;
+    private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JComboBox comboBox3;
     private JComboBox comboBox4;
     private JComboBox comboBox5;
-    private JTextField txtUsuarioF;
-    private JPasswordField pwUsuarioF;
+    private JTextField txtUserF;
+    private JPasswordField pwUserF;
     private JButton btnRegistrarUF;
     private JButton btnModificarUF;
     private JButton btnEliminarUF;
+    private JTable tbUserF;
 
     //Frame contenido del panel
 
@@ -41,7 +42,8 @@ public class UsuarioForm {
         btnEliminarUF.setIcon(new ImageIcon(deleteIcon));
 
     }
-    public static void main(String[] args) {
-        new UsuarioForm(); // Crear una instancia para mostrar el formulario
-    }
+//    public static void main(String[] args) {
+//
+//        new UsuarioForm(); // Crear una instancia para mostrar el formulario
+//    }
 }
