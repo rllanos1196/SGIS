@@ -1,4 +1,6 @@
 package procesos;
 
-public class MenuService {
+public interface MenuService {
+
+
 }
