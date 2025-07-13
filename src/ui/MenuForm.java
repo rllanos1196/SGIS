@@ -1,5 +1,7 @@
 package ui;
 
+import utilerias.Conexion;
+
 import javax.swing.*;
 
 public class MenuForm extends JFrame {
@@ -52,7 +54,9 @@ public class MenuForm extends JFrame {
         setVisible(true);
 
     }
-    public static void main(String[] args) {
+        public static void main(String[] args) {
+
+
         SwingUtilities.invokeLater(() -> {
             new MenuForm();
         });
