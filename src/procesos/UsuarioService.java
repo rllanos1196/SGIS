@@ -1,4 +1,4 @@
 package procesos;
 
-public class UsuarioService {
+public interface UsuarioService {
 }
