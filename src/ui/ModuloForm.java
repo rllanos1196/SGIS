@@ -25,6 +25,7 @@ public class ModuloForm {
     private JButton btnEditar;
     private JPanel jpModulo;
     private JScrollPane scrollPane;
+    private JTextField txtId;
 
     private DefaultTableModel tableModel;
 
@@ -86,6 +87,7 @@ public class ModuloForm {
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String id = txtId.getText();
                 String codigo = txtCodigo.getText();
                 String nombre = txtNombre.getText();
                 String descripcion = textArea1.getText();
@@ -95,15 +97,66 @@ public class ModuloForm {
                     return;
                 }
 
-                Modulo modulo = new Modulo(codigo, nombre, descripcion);
-                modService.insertModulo(modulo);
-                JOptionPane.showMessageDialog(frame, "Módulo registrado correctamente.");
-
+                if (!id.isEmpty() && Long.parseLong(id) > 0) {
+                    Modulo mod = modService.findById(Long.parseLong(id));
+                    mod.setCodigo(codigo);
+                    mod.setNombre(nombre);
+                    mod.setDescripcion(descripcion);
+                    modService.updateModulo(mod);
+                    JOptionPane.showMessageDialog(frame, "Módulo actualizado correctamente.");
+                } else {
+                    Modulo modulo = new Modulo(codigo, nombre, descripcion);
+                    modService.insertModulo(modulo);
+                    JOptionPane.showMessageDialog(frame, "Módulo registrado correctamente.");
+                }
                 limpiarCamposEnContenedor(jpModulo);
+                listarModulo();
             }
         });
 
         listarModulo();
+
+        btnEditar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = tbModulo.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, seleccione un módulo para editar.");
+                    return;
+                }
+
+                Long id = (Long) tableModel.getValueAt(selectedRow, 0);
+                Modulo modulo = modService.findById(id);
+
+                if (modulo != null) {
+                    txtCodigo.setText(modulo.getCodigo());
+                    txtNombre.setText(modulo.getNombre());
+                    textArea1.setText(modulo.getDescripcion());
+                    txtId.setText(modulo.getId().toString());
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Módulo no encontrado.");
+                }
+            }
+        });
+        btnEliminar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = tbModulo.getSelectedRow();
+                if (selectedRow == -1) {
+                    JOptionPane.showMessageDialog(frame, "Por favor, seleccione un módulo para eliminar.");
+                    return;
+                }
+
+                Long id = (Long) tableModel.getValueAt(selectedRow, 0);
+                int confirm = JOptionPane.showConfirmDialog(frame, "¿Está seguro de eliminar este módulo?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    modService.deleteModulo(id);
+                    tableModel.removeRow(selectedRow);
+                    JOptionPane.showMessageDialog(frame, "Módulo eliminado correctamente.");
+                    listarModulo();
+                }
+            }
+        });
     }
     private void limpiarCamposEnContenedor(java.awt.Container contenedor) {
         for (java.awt.Component c : contenedor.getComponents()) {
