@@ -13,6 +13,9 @@ public class Sistema {
     private Integer estado;
     private Long idDependencia;
 
+    public Sistema(long idSistema) {
+    }
+
     public Long getId() {
         return id;
     }
