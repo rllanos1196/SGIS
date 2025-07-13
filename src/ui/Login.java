@@ -1,4 +1,9 @@
 package ui;
+import modelos.Usuario;
+import procesos.UsuarioService;
+import procesos.UsuarioServiceImpl;
+import utilerias.Response;
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -13,8 +18,11 @@ public class Login {
     private JLabel lblPassword;
 
 
+    UsuarioService usuarioService;
+
 
     public Login(){
+        usuarioService = new UsuarioServiceImpl();
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -32,7 +40,10 @@ public class Login {
         Image passIcon = ((ImageIcon) lblPassword.getIcon()).getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         lblPassword.setIcon(new ImageIcon(passIcon));
 
-
+// En tu constructor o donde creas el botón:
+        btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCancelar.setForeground(Color.WHITE);
 
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
@@ -41,7 +52,11 @@ public class Login {
             // Validar usuario y contraseña
             String user = txtUser.getText();
             String pass = new String(pwUser.getPassword());
-            if (user.equals("admin") && pass.equals("admin")) {
+
+            Response<Usuario> response = usuarioService.autenticarUsuario(user,pass); // Sim
+            Usuario usuario = response.getData();
+
+            if (response.isEstado() && usuario != null) {
                 btnIngresar.setEnabled(false);
                 btnCancelar.setEnabled(false);
                 progressBar1.setVisible(true);
