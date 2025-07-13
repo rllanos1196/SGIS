@@ -1,4 +1,4 @@
 package procesos;
 
-public class MenuServiceImpl {
+public class MenuServiceImpl implements MenuService {
 }

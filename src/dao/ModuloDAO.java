@@ -109,10 +109,11 @@ public class ModuloDAO {
         }
     }
     public Boolean delete(Long id) {
-        String sql = "DELETE FROM modulo WHERE ID=?";
+        String sql = "UPDATE modulo SET ESTADO=? WHERE ID=?";
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setLong(1, id);
+            ps.setBoolean(1, Boolean.FALSE);
+            ps.setLong(2, id);
             ps.executeUpdate();return Boolean.TRUE;
         } catch (SQLException e) {
             e.printStackTrace();
