@@ -10,10 +10,21 @@ public class Sistema {
     private Long idUsuarioRegistro;
     private LocalDateTime fechaModifica;
     private Long idUsuarioModifica;
-    private Integer estado;
+    private Boolean estado;
     private Long idDependencia;
 
-    public Sistema(long idSistema) {
+    public Sistema() {
+
+    }
+
+    public Sistema(Long id) {
+        this.id = id;
+    }
+
+    public Sistema(Long id, String codigo, String nombre) {
+        this.id = id;
+        this.codigo = codigo;
+        this.nombre = nombre;
     }
 
     public Long getId() {
@@ -72,11 +83,11 @@ public class Sistema {
         this.idUsuarioModifica = idUsuarioModifica;
     }
 
-    public Integer getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
@@ -86,5 +97,10 @@ public class Sistema {
 
     public void setIdDependencia(Long idDependencia) {
         this.idDependencia = idDependencia;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

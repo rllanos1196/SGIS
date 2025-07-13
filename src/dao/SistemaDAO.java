@@ -13,36 +13,35 @@ import java.util.List;
 public class SistemaDAO {
 
     public boolean registrarSistema(Sistema sis) {
-        String sql = "INSERT INTO sistema(CODIGO,NOMBRE,FECHA_REGISTRO,ID_USUARIO_REGISTRO,ESTADO,ID_DEPENDENCIA) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sistema(CODIGO,NOMBRE,FECHA_REGISTRO,ID_USUARIO_REGISTRO,ESTADO) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, sis.getCodigo());
             ps.setString(2, sis.getNombre());
             ps.setObject(3, sis.getFechaRegistro());
             ps.setLong(4, sis.getIdUsuarioRegistro());
-            ps.setInt(5, sis.getEstado());
-            ps.setLong(6, sis.getIdDependencia());
+            ps.setBoolean(5, sis.getEstado());
             ps.executeUpdate();
             return Boolean.TRUE;
         } catch (SQLException e) {
+            e.printStackTrace();
             return Boolean.FALSE;
         }
     }
 
     public boolean actualizarSistema(Sistema sis) {
-        String sql = "UPDATE sistema SET CODIGO = ?, NOMBRE = ?, FECHA_MODIFICA = ?, ID_USUARIO_MODIFICA = ?, ESTADO = ?, ID_DEPENDENCIA = ? WHERE ID = ?";
+        String sql = "UPDATE sistema SET CODIGO = ?, NOMBRE = ?, FECHA_MODIFICA = ?, ID_USUARIO_MODIFICA = ? WHERE ID = ?";
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, sis.getCodigo());
             ps.setString(2, sis.getNombre());
             ps.setObject(3, sis.getFechaModifica());
             ps.setLong(4, sis.getIdUsuarioModifica());
-            ps.setInt(5, sis.getEstado());
-            ps.setLong(6, sis.getIdDependencia());
-            ps.setLong(7, sis.getId());
+            ps.setLong(5, sis.getId());
             ps.executeUpdate();
             return Boolean.TRUE;
         } catch (SQLException e) {
+            e.printStackTrace();
             return Boolean.FALSE;
         }
     }
@@ -62,7 +61,7 @@ public class SistemaDAO {
                 sistema.setIdUsuarioRegistro(rs.getLong("ID_USUARIO_REGISTRO"));
                 sistema.setFechaModifica(rs.getObject("FECHA_MODIFICA", java.time.LocalDateTime.class));
                 sistema.setIdUsuarioModifica(rs.getLong("ID_USUARIO_MODIFICA"));
-                sistema.setEstado(rs.getInt("ESTADO"));
+                sistema.setEstado(rs.getBoolean("ESTADO"));
                 sistema.setIdDependencia(rs.getLong("ID_DEPENDENCIA"));
             }
         } catch (SQLException e) {
@@ -95,7 +94,7 @@ public class SistemaDAO {
                 sistema.setIdUsuarioRegistro(rs.getLong("ID_USUARIO_REGISTRO"));
                 sistema.setFechaModifica(rs.getObject("FECHA_MODIFICA", java.time.LocalDateTime.class));
                 sistema.setIdUsuarioModifica(rs.getLong("ID_USUARIO_MODIFICA"));
-                sistema.setEstado(rs.getInt("ESTADO"));
+                sistema.setEstado(rs.getBoolean("ESTADO"));
                 sistema.setIdDependencia(rs.getLong("ID_DEPENDENCIA"));
                 lista.add(sistema);
             }

@@ -18,10 +18,18 @@ public class SistemaServiceImpl implements SistemaService{
         Boolean res=Boolean.FALSE;
         try {
             if(sistema.getId()== null){
+                sistema.setFechaRegistro(LocalDateTime.now());
+                sistema.setEstado(Boolean.TRUE);
+                sistema.setIdUsuarioRegistro(1L); // Asignar un usuario por defecto, esto debería ser dinámico
                 res = sistemaDAO.registrarSistema(sistema);
                 return new Response<>(Messages.CREATED, true, res);
             }else {
-                res = sistemaDAO.actualizarSistema(sistema);
+                Sistema sis = sistemaDAO.findById(sistema.getId());
+                sis.setFechaModifica(LocalDateTime.now());
+                sis.setIdUsuarioModifica(1L);
+                sis.setCodigo(sistema.getCodigo());
+                sis.setNombre(sistema.getNombre());
+                res = sistemaDAO.actualizarSistema(sis);
                 return new Response<>(Messages.UPDATED, false, res);
             }
         } catch (Exception e) {

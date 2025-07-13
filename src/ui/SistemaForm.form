@@ -42,19 +42,6 @@
         </constraints>
         <properties/>
       </component>
-      <component id="4e8bb" class="javax.swing.JTable" binding="tbSistema">
-        <constraints>
-          <grid row="3" column="0" row-span="6" col-span="4" vsize-policy="0" hsize-policy="0" anchor="1" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="250" height="100"/>
-          </grid>
-        </constraints>
-        <properties>
-          <autoCreateRowSorter value="false"/>
-          <fillsViewportHeight value="false"/>
-          <showHorizontalLines value="true"/>
-          <showVerticalLines value="true"/>
-        </properties>
-      </component>
       <grid id="aba35" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="5" left="5" bottom="5" right="5"/>
         <constraints>
@@ -91,6 +78,24 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="df796" binding="scrollPane">
+        <constraints>
+          <grid row="3" column="0" row-span="6" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="4e8bb" class="javax.swing.JTable" binding="tbSistema">
+            <constraints/>
+            <properties>
+              <autoCreateRowSorter value="false"/>
+              <fillsViewportHeight value="false"/>
+              <showHorizontalLines value="true"/>
+              <showVerticalLines value="true"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
