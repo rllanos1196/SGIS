@@ -6,6 +6,7 @@ import procesos.ModuloServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -56,6 +57,31 @@ public class ModuloForm {
         tbModulo.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // Deshabilita el ajuste automático de columnas
         scrollPane.setViewportView(tbModulo); // Asegúrate de que el JScrollPane esté configurado correctamente
 
+        //COLOR A LA CABECERA DE LA TABLA
+        tbModulo.getTableHeader().setDefaultRenderer(new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                java.awt.Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setBackground(Color.GRAY); // Fondo GRIS
+                c.setForeground(java.awt.Color.WHITE); // Texto blanco
+                setHorizontalAlignment(CENTER);
+                return c;
+            }
+        });
+
+        // Configuración de los botones
+        btnRegistrar.setIcon(new ImageIcon("src/ImgIcon/save.png"));
+        Image saveIcon = ((ImageIcon) btnRegistrar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnRegistrar.setIcon(new ImageIcon(saveIcon));
+
+        btnEditar.setIcon(new ImageIcon("src/ImgIcon/editar.png"));
+        Image editIcon = ((ImageIcon) btnEditar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnEditar.setIcon(new ImageIcon(editIcon));
+
+        btnEliminar.setIcon(new ImageIcon("src/ImgIcon/delete.png"));
+        Image deleteIcon = ((ImageIcon) btnEliminar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        btnEliminar.setIcon(new ImageIcon(deleteIcon));
+
 
         // Evento del botón que SÍ existe en el .form
         btnRegistrar.addActionListener(new ActionListener() {
@@ -101,6 +127,7 @@ public class ModuloForm {
 
                 Long id = (Long) tableModel.getValueAt(selectedRow, 0);
                 Modulo modulo = modService.findById(id);
+//                jpModulo.setTittle("Editar Módulo");
 
                 if (modulo != null) {
                     txtCodigo.setText(modulo.getCodigo());
@@ -161,7 +188,8 @@ public class ModuloForm {
     }
 
 
-    /*public static void main(String[] args) {
-        SwingUtilities.invokeLater(ModuloForm::new);
-    }*/
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(ModuloForm::new);
+//    }
+
 }
