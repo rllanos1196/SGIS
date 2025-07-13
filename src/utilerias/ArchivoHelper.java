@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class ArchivoHelper {
     private static final String RUTA_ARCHIVOS = "/Users/rubenchilonllanos/Documents/UPN/V CICLO/POO/sgis_archivos/";
@@ -79,4 +81,20 @@ public class ArchivoHelper {
             return false;
         }
     }
+    public static String encriptarMD5(String texto) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] hashBytes = md.digest(texto.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Error al encriptar con MD5: " + e.getMessage());
+            return "Error al encriptar con MD5: ";
+        }
+    }
+
+
 }

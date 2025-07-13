@@ -10,7 +10,7 @@
       <opaque value="false"/>
       <preferredSize width="700" height="500"/>
     </properties>
-    <border type="bevel-lowered" title="Modulo" title-justification="2"/>
+    <border type="bevel-lowered" title="Registrar Módulo" title-justification="2"/>
     <children>
       <component id="7fc5f" class="javax.swing.JLabel" binding="lblCodigo">
         <constraints>
