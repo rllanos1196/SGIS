@@ -3,6 +3,7 @@ package ui;
 import modelos.Modulo;
 import procesos.ModuloService;
 import procesos.ModuloServiceImpl;
+import utilerias.ModoOperacion;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,11 +26,15 @@ public class ModuloForm {
     private JButton btnEditar;
     private JPanel jpModulo;
     private JScrollPane scrollPane;
+    private JButton btnCancelarM;
     private JTextField txtId;
 
     private DefaultTableModel tableModel;
 
     private ModuloService modService;
+
+    private ModoOperacion modoActual = ModoOperacion.REGISTRAR;
+    private Long id;
 
     public ModuloForm() {
         modService = new ModuloServiceImpl();
@@ -78,16 +83,20 @@ public class ModuloForm {
         Image editIcon = ((ImageIcon) btnEditar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         btnEditar.setIcon(new ImageIcon(editIcon));
 
+        btnCancelarM.setIcon(new ImageIcon("src/ImgIcon/cancel.png"));
+        Image cancelIcon = ((ImageIcon) btnCancelarM.getIcon()).getImage().getScaledInstance(22, 22, Image.SCALE_SMOOTH);
+        btnCancelarM.setIcon(new ImageIcon(cancelIcon));
+
         btnEliminar.setIcon(new ImageIcon("src/ImgIcon/delete.png"));
         Image deleteIcon = ((ImageIcon) btnEliminar.getIcon()).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         btnEliminar.setIcon(new ImageIcon(deleteIcon));
 
+        btnRegistrar.setText("Registrar");
 
         // Evento del botón que SÍ existe en el .form
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String id = txtId.getText();
                 String codigo = txtCodigo.getText();
                 String nombre = txtNombre.getText();
                 String descripcion = textArea1.getText();
@@ -97,8 +106,8 @@ public class ModuloForm {
                     return;
                 }
 
-                if (!id.isEmpty() && Long.parseLong(id) > 0) {
-                    Modulo mod = modService.findById(Long.parseLong(id));
+                if (modoActual == ModoOperacion.EDITAR) {
+                    Modulo mod = modService.findById(id);
                     mod.setCodigo(codigo);
                     mod.setNombre(nombre);
                     mod.setDescripcion(descripcion);
@@ -111,6 +120,7 @@ public class ModuloForm {
                 }
                 limpiarCamposEnContenedor(jpModulo);
                 listarModulo();
+                btnRegistrar.setText("Registrar");
             }
         });
 
@@ -125,7 +135,7 @@ public class ModuloForm {
                     return;
                 }
 
-                Long id = (Long) tableModel.getValueAt(selectedRow, 0);
+                id = (Long) tableModel.getValueAt(selectedRow, 0);
                 Modulo modulo = modService.findById(id);
 //                jpModulo.setTittle("Editar Módulo");
 
@@ -133,12 +143,13 @@ public class ModuloForm {
                     txtCodigo.setText(modulo.getCodigo());
                     txtNombre.setText(modulo.getNombre());
                     textArea1.setText(modulo.getDescripcion());
-                    txtId.setText(modulo.getId().toString());
+                    btnRegistrar.setText("Actualizar");
                 } else {
                     JOptionPane.showMessageDialog(frame, "Módulo no encontrado.");
                 }
             }
         });
+
         btnEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -188,8 +199,10 @@ public class ModuloForm {
     }
 
 
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(ModuloForm::new);
-//    }
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ModuloForm::new);
+    }
 
 }
