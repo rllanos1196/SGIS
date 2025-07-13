@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 
-public class ModuloForm {
+public class ModuloForm extends JPanel{
     private JLabel lblCodigo;
     private JLabel lblNombre;
     private JLabel lblDescripcion;
@@ -34,21 +34,17 @@ public class ModuloForm {
     private ModuloService modService;
 
     private ModoOperacion modoActual = ModoOperacion.REGISTRAR;
-    private Long id;
-
+    private Long idMod;
+    // public ModuloForm() {
     public ModuloForm() {
         modService = new ModuloServiceImpl();
 
         // Frame y contenido del panel generado automáticamente por el diseñador
-        JFrame frame = new JFrame("Módulo");
-        frame.setContentPane(jpModulo);  // ¡Esta línea es la que usa tu diseño!
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setVisible(true);
+        setLayout(new BorderLayout());
+        add(jpModulo, BorderLayout.CENTER);
         // frame.setSize(800, 600);
 
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Código", "Nombre", "Descripción","Estado"}, 0); // Ajusta las columnas si son de Usuarios
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Código", "Nombre", "Descripción","Estado"}, 0);
         tbModulo.setModel(tableModel);
         tbModulo.getTableHeader().repaint();
         tbModulo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,7 +88,7 @@ public class ModuloForm {
         btnEliminar.setIcon(new ImageIcon(deleteIcon));
 
         btnRegistrar.setText("Registrar");
-
+        modoActual= ModoOperacion.REGISTRAR;
         // Evento del botón que SÍ existe en el .form
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
@@ -102,25 +98,26 @@ public class ModuloForm {
                 String descripcion = textArea1.getText();
 
                 if (codigo.isEmpty() || nombre.isEmpty() || descripcion.isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Por favor, complete todos los campos.");
                     return;
                 }
 
                 if (modoActual == ModoOperacion.EDITAR) {
-                    Modulo mod = modService.findById(id);
+                    Modulo mod = modService.findById(idMod);
                     mod.setCodigo(codigo);
                     mod.setNombre(nombre);
                     mod.setDescripcion(descripcion);
                     modService.updateModulo(mod);
-                    JOptionPane.showMessageDialog(frame, "Módulo actualizado correctamente.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Módulo actualizado correctamente.");
                 } else {
                     Modulo modulo = new Modulo(codigo, nombre, descripcion);
                     modService.insertModulo(modulo);
-                    JOptionPane.showMessageDialog(frame, "Módulo registrado correctamente.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Módulo registrado correctamente.");
                 }
                 limpiarCamposEnContenedor(jpModulo);
                 listarModulo();
                 btnRegistrar.setText("Registrar");
+                modoActual= ModoOperacion.REGISTRAR;
             }
         });
 
@@ -131,12 +128,12 @@ public class ModuloForm {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tbModulo.getSelectedRow();
                 if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(frame, "Por favor, seleccione un módulo para editar.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Por favor, seleccione un módulo para editar.");
                     return;
                 }
 
-                id = (Long) tableModel.getValueAt(selectedRow, 0);
-                Modulo modulo = modService.findById(id);
+                idMod = (Long) tableModel.getValueAt(selectedRow, 0);
+                Modulo modulo = modService.findById(idMod);
 //                jpModulo.setTittle("Editar Módulo");
 
                 if (modulo != null) {
@@ -144,8 +141,9 @@ public class ModuloForm {
                     txtNombre.setText(modulo.getNombre());
                     textArea1.setText(modulo.getDescripcion());
                     btnRegistrar.setText("Actualizar");
+                    modoActual = ModoOperacion.EDITAR;
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Módulo no encontrado.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Módulo no encontrado.");
                 }
             }
         });
@@ -155,20 +153,21 @@ public class ModuloForm {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = tbModulo.getSelectedRow();
                 if (selectedRow == -1) {
-                    JOptionPane.showMessageDialog(frame, "Por favor, seleccione un módulo para eliminar.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Por favor, seleccione un módulo para eliminar.");
                     return;
                 }
 
                 Long id = (Long) tableModel.getValueAt(selectedRow, 0);
-                int confirm = JOptionPane.showConfirmDialog(frame, "¿Está seguro de eliminar este módulo?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+                int confirm = JOptionPane.showConfirmDialog(ModuloForm.this, "¿Está seguro de eliminar este módulo?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     modService.deleteModulo(id);
                     tableModel.removeRow(selectedRow);
-                    JOptionPane.showMessageDialog(frame, "Módulo eliminado correctamente.");
+                    JOptionPane.showMessageDialog(ModuloForm.this, "Módulo eliminado correctamente.");
                     listarModulo();
                 }
             }
         });
+       // return jpModulo;
     }
     private void limpiarCamposEnContenedor(java.awt.Container contenedor) {
         for (java.awt.Component c : contenedor.getComponents()) {
