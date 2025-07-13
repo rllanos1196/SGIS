@@ -197,11 +197,8 @@ public class ModuloForm extends JPanel{
         tbModulo.repaint();
     }
 
-
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ModuloForm::new);
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(ModuloForm::new);
+//    }
 
 }
