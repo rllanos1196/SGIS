@@ -39,6 +39,7 @@ public class MenuForm extends JFrame {
         menuModulos.add(itemModulo2);
         menuModulos.add(itemModulo3);
 
+
         // Acción para abrir el formulario Modulo (ahora un JInternalFrame)
         itemModulo1.addActionListener(e -> abrirVentanaInterna(new ModuloInternalFrame())); // Usamos una nueva clase ModuloInternalFrame
         // Acción para abrir el formulario Sistema (ahora un JInternalFrame)
@@ -52,6 +53,34 @@ public class MenuForm extends JFrame {
 
         // Agregar la barra de menú al JFrame
         setJMenuBar(menuBar);
+
+
+        JDesktopPane fondoPanel = new JDesktopPane() {
+            private Image bg = new ImageIcon("src/ImgIcon/sistema.jpg").getImage();
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        fondoPanel.setLayout(new BorderLayout());
+
+        JLabel label1 = new JLabel("Bienvenido al SGIS");
+        label1.setOpaque(false); // Hacer que el JLabel sea transparente
+        label1.setFont(new Font("Roboto", Font.BOLD, 55));
+        label1.setForeground(new Color(255, 255, 255));
+        fondoPanel.add(label1, BorderLayout.CENTER);
+
+        label1.setIcon(new ImageIcon("src/ImgIcon/security.png"));
+        Image segIcon = ((ImageIcon) label1.getIcon()).getImage().getScaledInstance(110, 110, Image.SCALE_SMOOTH);
+        label1.setIcon(new ImageIcon(segIcon));
+        label1.setHorizontalAlignment(SwingConstants.LEFT);
+
+
+        // Añadir el fondo al JDesktopPane
+        desktopPane.add(fondoPanel, JLayeredPane.DEFAULT_LAYER);
+        fondoPanel.setBounds(0, 0, getWidth(), getHeight()); // Ajustar el tamaño del fondo al JDesktopPane
+
 
         setVisible(true);
     }
