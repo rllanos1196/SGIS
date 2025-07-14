@@ -43,7 +43,7 @@ public class Login {
 // En tu constructor o donde creas el botón:
         btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnCancelar.setForeground(Color.WHITE);
+//        btnCancelar.setForeground(Color.WHITE);
 
         JPanel loginPanel = new JPanel();
         loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));

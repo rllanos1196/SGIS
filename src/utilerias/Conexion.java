@@ -12,9 +12,7 @@ public class Conexion {
     public static Connection conectar() {
         Connection con = null;
         try {
-            con = DriverManager.getConnection(URL, USUARIO,
-                    PASSWORD);
-            System.out.println("Conectado correctamente.");
+            con = DriverManager.getConnection(URL, USUARIO, PASSWORD);
         } catch (SQLException e) {
             System.out.println("Error al conectar: " + e.getMessage());
         }
