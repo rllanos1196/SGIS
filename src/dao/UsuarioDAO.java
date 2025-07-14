@@ -86,7 +86,7 @@ public class UsuarioDAO {
         }
     }
     public boolean actualizarUsuario(Usuario user) {
-        String sql = "UPDATE usuario SET ID_COMPANIA=?, ID_DEPENDENCIA=?, ID_CARGO=?, ID_PERSONA=?, ID_SISTEMA=?, NOMBRE=?, PASSWORD=?, ESTADO=?, FECHA_INGRESO=?, FECHA_CADUCA=?, FECHA_REGISTRO=?, ID_USUARIO_REGISTRO=? WHERE ID=?";
+        String sql = "UPDATE usuario SET ID_COMPANIA=?, ID_DEPENDENCIA=?, ID_CARGO=?, ID_PERSONA=?, ID_SISTEMA=?, NOMBRE=?, ID_USUARIO_REGISTRO=? WHERE ID=?";
         try (Connection con = Conexion.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setLong(1, user.getIdCompania());
@@ -95,13 +95,8 @@ public class UsuarioDAO {
             ps.setLong(4, user.getIdPersona());
             ps.setLong(5, user.getSistema().getId());
             ps.setString(6, user.getNombre());
-            ps.setString(7, user.getPassword());
-            ps.setBoolean(8, user.getEstado());
-            ps.setObject(9, user.getFechaIngreso());
-            ps.setObject(10, user.getFechaCaduca());
-            ps.setObject(11, user.getFechaRegistro());
-            ps.setLong(12, user.getIdUsuarioRegistro());
-            ps.setLong(13, user.getId());
+            ps.setLong(7, user.getIdUsuarioRegistro());
+            ps.setLong(8, user.getId());
             ps.executeUpdate();
             return Boolean.TRUE;
         } catch (SQLException e) {
